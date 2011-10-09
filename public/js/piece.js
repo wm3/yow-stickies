@@ -19,7 +19,7 @@ Piece.create = function(parent, id) {
 	return result;
 }
 Piece.saveAll = function(board) {
-	Piece.list(board).each(function() {
+	Piece.list(board).each(function(i, view) {
 		var id = this.getId();
 		var data = {
 			text: this.getText(),
@@ -30,11 +30,20 @@ Piece.saveAll = function(board) {
 		var method = (id != '') ? 'PUT' : 'POST';
 		var url = (id != '') ? 'piece/' + id : 'piece';
 
+		console.log('update: ' + id);
+		console.log(data);
+
 		$.ajax(url, {
 			type: method,
 			data: data,
-			success: function() {
-				console.log('update: ' + id);
+			dataType: 'json',
+			success: function(data, textStatus, xhr) {
+				console.log(data);
+				if ( ! id) {
+					var newId = data.id;
+					console.log('new: ' + newId);
+					view.setId(newId);
+				}
 			}
 		});
 	});
@@ -60,12 +69,15 @@ Piece.prototype = {
 	getId: function() {
 		return this.root.find('input[name=id]').val();
 	},
+	setId: function(id) {
+		return this.root.find('input[name=id]').val(id);
+	},
 	getText: function() {
-		return this.root.find('textarea').text();
+		return this.root.find('textarea').val();
 	},
 	setText: function(text) {
 		if ( ! text) text = "(テキストを入力して下さい)";
-		this.root.find('textarea').text(text);
+		this.root.find('textarea').val(text);
 	},
 	getPosition: function() {
 		var x = parseInt(this.root.css('left'));
@@ -75,6 +87,7 @@ Piece.prototype = {
 		return { x: x, y: y };
 	},
 	setPosition: function(position) {
+		// TODO: 範囲チェック
 		this.root.css('left', position.x);
 		this.root.css('top', position.y);
 	},
