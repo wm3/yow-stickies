@@ -6,10 +6,15 @@ html {
 	line-height: 1;
 }
 
-#draggable {
+.piece {
 	border: 1px solid #FFFF88;
 	background: #FFFFDD;
 	width: 10em;;
 	min-height: 32px;
 	padding: 0.2em 0.5em;
+}
+
+.item:hover {
+	text-decoration: underline;
+	cursor: link;
 }
