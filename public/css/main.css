@@ -33,6 +33,9 @@ html {
 	min-height: 4em;
 	border: none;
 }
+.piece a {
+	text-decoration: none;
+}
 
 .item:hover {
 	text-decoration: underline;
