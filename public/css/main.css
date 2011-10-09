@@ -1,0 +1,15 @@
+div, p, h1, h2, h3, h4, h5 {
+	padding: 0;
+}
+
+html {
+	line-height: 1;
+}
+
+#draggable {
+	border: 1px solid #FFFF88;
+	background: #FFFFDD;
+	width: 10em;;
+	min-height: 32px;
+	padding: 0.2em 0.5em;
+}

@@ -1,0 +1,5 @@
+public/js/jquery-*
+*.sw?
+nohup.out
+public/css/ui-lightness
+public/development-bundle
