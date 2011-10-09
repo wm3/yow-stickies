@@ -12,9 +12,20 @@ Piece.create = function(parent) {
 	root.append('<div class="footer" />')
 	var result = new Piece(root.appendTo(parent));
 
-	result.setText("(テキストを入力して下さい)");
+	result.setText('');
 
 	return result;
+}
+
+Piece.loadAll = function(board) {
+	$.getJSON('pieces', function(pieces) {
+		for (var i = 0; i < pieces.length; i++) {
+			var data = pieces[i];
+			var view = Piece.create($(board));
+			view.setText(data.text);
+			view.setPosition({x: data.x, y: data.y});
+		}
+	});
 }
 
 Piece.prototype = {
@@ -22,7 +33,12 @@ Piece.prototype = {
 		return $(this.root).find('textarea').text();
 	},
 	setText: function(text) {
+		if ( ! text) text = "(テキストを入力して下さい)";
 		$(this.root).find('textarea').text(text);
+	},
+	setPosition: function(position) {
+		this.root.css('left', position.x);
+		this.root.css('top', position.y);
 	},
 
 	rename: function() {
@@ -59,6 +75,7 @@ Piece.prototype = {
 }
 
 $(function() {
+	Piece.loadAll($('#board'));
 	$('#toolbar a[href=#create]').click(function() {
 		var draggable = Piece.create("#board");
 		return false;
