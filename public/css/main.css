@@ -1,17 +1,35 @@
 div, p, h1, h2, h3, h4, h5 {
 	padding: 0;
+	margin: 0;
 }
 
 html {
 	line-height: 1;
+	font-size: 90%;
 }
 
 .piece {
 	border: 1px solid #FFFF88;
 	background: #FFFFDD;
-	width: 10em;;
-	min-height: 32px;
+	width: 10em;
 	padding: 0.2em 0.5em;
+}
+
+.piece .header {
+	height: 1em;
+}
+.piece .footer {
+	height: 0.5em;
+}
+.piece textarea {
+	font-size: 100%;
+	margin: 0;
+	background: #FFFFDD;
+	resize: none;
+	overflow: visible;
+	width: 100%;
+	min-height: 4em;
+	border: none;
 }
 
 .item:hover {
