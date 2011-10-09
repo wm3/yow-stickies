@@ -9,6 +9,10 @@ class Piece < Sequel::Model
   end
 end
 
+get '/' do
+  redirect 'index.html'
+end
+
 post '/piece' do
   DB.transaction do
     piece = Piece.create(
